@@ -1,0 +1,65 @@
+using System;
+using System.Text.RegularExpressions;
+
+namespace EditorHtml
+{
+    public class Visualizador
+    {
+
+        public static void Show(string text)
+        {
+            Console.Clear();
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.Clear();
+            Console.WriteLine("MODO VISUALIZADOR");
+            Console.WriteLine("---------------------------");
+            Replace(text);
+            Console.WriteLine("---------------------------");
+            Console.ReadKey();
+            Menu.Show();
+
+        }
+        public static void Replace(string text)
+        {
+            //Busca tudo que está no campo denominado
+            var strong = new Regex(@"<\s*strong[^>]*>(.*?)<\s*/\s*strong>");
+
+            var Palavras = text.Split(' ');
+
+            for (var i = 0; i < Palavras.Length; i++)
+            {
+                if (strong.IsMatch(Palavras[i]))
+                {
+
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Write(
+                        Palavras[i].Substring(
+                            Palavras[i].IndexOf('>') + 1,
+                            (
+                                (Palavras[i].LastIndexOf('<') - 1) -
+                                Palavras[i].IndexOf('>')
+                                )
+                        )
+                    );
+
+                    Console.Write(" ");
+
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    Console.Write(Palavras[i]);
+
+                    Console.Write(" ");
+                }
+
+            }
+
+
+
+        }
+
+
+    }
+}
