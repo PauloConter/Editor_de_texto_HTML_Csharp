@@ -31,7 +31,6 @@ namespace EditorHtml
             Console.WriteLine("---------------------------");
             Console.WriteLine(" Deseja salvar o arquivo?");
             Visualizador.Show(Arquivo.ToString());
-
         }
     }
 }
